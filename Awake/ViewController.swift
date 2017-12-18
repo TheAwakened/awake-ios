@@ -13,23 +13,19 @@ class ViewController: UIViewController {
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
-    var signInApi = "https://724fa6d1.ngrok.io/user_token"
+    var signInApi = Constants.apiUrl + "/api/authenticate"
+    var settings = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        if UserDefaults.standard.object(forKey:"token") != nil
+        if settings.object(forKey:"token") != nil
         {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "AwakePage")
-            self.present(vc, animated: true, completion: nil)
+            self.performSegue(withIdentifier: "goToAwake", sender: self)
         }
             // Do any additional setup after loading the view, typically from a nib.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+    
+    @IBAction func login(_ sender: Any) {
         let url = URL(string: signInApi)
         var urlRequest = URLRequest(url: url!)
         let session = URLSession.shared
@@ -62,9 +58,13 @@ class ViewController: UIViewController {
                         style: .alert
                     )
                 }else{
+                    print(responseData)
                     if(responseData["jwt"] != nil){
-                        print(responseData)
-                        self?.performSegue(withIdentifier: "goToAwake", sender: self)
+                        self?.settings.set(responseData["jwt"], forKey: "token")
+                        DispatchQueue.main.async{[weak self] in
+                            self?.performSegue(withIdentifier: "goToAwake", sender: self)
+                        }
+                        
                     }else{
                         self?.showAlert(
                             with: "Error",
@@ -81,11 +81,9 @@ class ViewController: UIViewController {
                     style: .alert
                 )
             }
-            // parse the result as JSON, since that's what the API provides
-            
+            // parse the result as JSON, since that's what the API providess
         }
         task.resume()
-        return false
     }
 }
 

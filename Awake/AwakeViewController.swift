@@ -9,7 +9,9 @@
 import UIKit
 
 class AwakeViewController: UIViewController {
-    var awakeAPI = ""
+    var awakeAPI = Constants.apiUrl + "/api/awakenings"
+    var settings = UserDefaults.standard
+    
     @IBAction func awake(_ sender: Any) {
         let url = URL(string: awakeAPI)
         var urlRequest = URLRequest(url: url!)
@@ -21,7 +23,7 @@ class AwakeViewController: UIViewController {
         urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: data)
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
-        urlRequest.addValue(UserDefaults.standard.object(forKey: "token") as! String,forHTTPHeaderField:"Authorization")
+        urlRequest.addValue(settings.object(forKey: "token") as! String,forHTTPHeaderField:"Authorization")
         
         let task = session.dataTask(with: urlRequest){[weak self] data, response, error in
             // make sure we got data
@@ -46,7 +48,7 @@ class AwakeViewController: UIViewController {
                 }else{
                     self?.showAlert(
                         with: "Sucess",
-                        detail: "You are awake!",
+                        detail: "You are awoke!",
                         style: .alert
                     )
                 }
@@ -62,6 +64,11 @@ class AwakeViewController: UIViewController {
             
         }
         task.resume()
+    }
+    @IBAction func signOut(_ sender: Any) {
+        settings.removeObject(forKey: "token")
+        let vc = storyboard?.instantiateViewController(withIdentifier: "Home")
+        self.present(vc!, animated: true, completion: nil)
     }
 }
 
