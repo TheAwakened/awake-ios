@@ -12,7 +12,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var loginButton: UIButton!
     var signInApi = Constants.apiUrl + "/api/authenticate"
     var settings = UserDefaults.standard
     
@@ -26,6 +28,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func login(_ sender: Any) {
+        showLoading()
         let url = URL(string: signInApi)
         var urlRequest = URLRequest(url: url!)
         let session = URLSession.shared
@@ -39,6 +42,9 @@ class ViewController: UIViewController {
         
         let task = session.dataTask(with: urlRequest){[weak self] data, response, error in
             // make sure we got data
+            DispatchQueue.main.async {
+                self?.hideLoading()
+            }
             guard data != nil else {
                 self?.showAlert(
                     with: "Error",
@@ -85,7 +91,16 @@ class ViewController: UIViewController {
         }
         task.resume()
     }
+    func showLoading(){
+        activityIndicator.startAnimating()
+        loginButton.alpha = 0
+    }
+    func hideLoading(){
+        activityIndicator.stopAnimating()
+        loginButton.alpha = 1
+    }
 }
+
 
 extension UIViewController {
     func showAlert(with title: String, detail message: String, style preferredStyle: UIAlertControllerStyle){
