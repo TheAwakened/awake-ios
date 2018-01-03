@@ -1,39 +1,27 @@
 //
-//  ViewController.swift
+//  RegisterViewController.swift
 //  Awake
 //
-//  Created by admin on 13/11/2017.
-//  Copyright © 2017 Dreamer. All rights reserved.
+//  Created by admin on 03/01/2018.
+//  Copyright © 2018 Dreamer. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController, UIGestureRecognizerDelegate, UITextFieldDelegate {
-    
+class RegisterViewController: UIViewController, UIGestureRecognizerDelegate, UITextFieldDelegate {
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var confirmPasswordField: UITextField!
     
-    @IBOutlet weak var loginButton: UIButton!
-    var signInApi = Constants.apiUrl + "/api/authenticate"
-    var settings = UserDefaults.standard
+    let registerApi = Constants.apiUrl + "/api/users"
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         usernameField.delegate = self
         passwordField.delegate = self
-        if settings.object(forKey:"token") != nil
-        {
-            self.performSegue(withIdentifier: "goToAwake", sender: self)
-        }
-            // Do any additional setup after loading the view, typically from a nib.
+        confirmPasswordField.delegate = self
     }
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        login(textField)
-        return true
-    }
-    @IBAction func login(_ sender: Any) {
+    
+    @IBAction func submit(_ sender: Any) {
         if usernameField.text! == "" {
             self.showAlert(with: "Error", detail: "Username cannot be empty", style: .alert)
             return
@@ -42,13 +30,27 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, UITextField
             self.showAlert(with: "Error", detail: "Password cannot be empty", style: .alert)
             return
         }
-        showLoading()
-        let url = URL(string: signInApi)
+        if confirmPasswordField.text! == "" {
+            self.showAlert(with: "Error", detail: "Confirm password cannot be empty", style: .alert)
+            return
+        }
+        if passwordField.text! != confirmPasswordField.text! {
+            self.showAlert(with: "Error", detail: "Password and confirm password are different", style: .alert)
+            return
+        }
+        
+        let url = URL(string: registerApi)
         var urlRequest = URLRequest(url: url!)
         let session = URLSession.shared
         urlRequest.httpMethod = "POST"
         
-        let data: [String:Any] = ["auth":["username":usernameField.text!,"password":passwordField.text!]]
+        let data: [String:Any] = [
+            "user":[
+                "username":usernameField.text!,
+                "password":passwordField.text!,
+                "password_confirmation":confirmPasswordField.text!
+            ]
+        ]
         
         urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: data)
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -56,9 +58,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, UITextField
         
         let task = session.dataTask(with: urlRequest){[weak self] data, response, error in
             // make sure we got data
-            DispatchQueue.main.async {
-                self?.hideLoading()
-            }
             guard data != nil else {
                 self?.showAlert(
                     with: "Error",
@@ -74,25 +73,31 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, UITextField
                 if error != nil {
                     self?.showAlert(
                         with: "Error",
-                        detail: "Invalid username or password",
+                        detail: "Username already taken",
                         style: .alert
                     )
                 }else{
-                    if(responseData["jwt"] != nil){
-                        self?.settings.set(responseData["jwt"], forKey: "token")
-                        DispatchQueue.main.async{[weak self] in
-                            self?.performSegue(withIdentifier: "goToAwake", sender: self)
+                    if(responseData["user"] != nil){
+                        DispatchQueue.main.async {
+                            let alert = UIAlertController(
+                                title: "Success",
+                                message: "Successfully Registered",
+                                preferredStyle: .alert
+                            )
+                            
+                            alert.addAction(UIAlertAction(title: "OK", style: .default){ action in
+                                self?.dismiss(animated: true, completion: nil)
+                            })
+                            self?.present(alert, animated: true, completion: nil)
                         }
-                        
                     }else{
                         self?.showAlert(
                             with: "Error",
-                            detail: "Invalid username or password",
+                            detail: "Username already taken",
                             style: .alert
                         )
                     }
                 }
-                
             }catch{
                 self?.showAlert(
                     with: "Error",
@@ -104,31 +109,15 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, UITextField
         }
         task.resume()
     }
-    func showLoading(){
-        activityIndicator.startAnimating()
-        loginButton.alpha = 0
-    }
-    func hideLoading(){
-        activityIndicator.stopAnimating()
-        loginButton.alpha = 1
-    }
     @IBAction func tappingBackground(_ sender: Any) {
         self.view.endEditing(true)
     }
-}
-
-
-extension UIViewController {
-    func showAlert(with title: String, detail message: String, style preferredStyle: UIAlertControllerStyle){
-        DispatchQueue.main.async {[weak self] in
-            let alert = UIAlertController(
-                title: title,
-                message: message,
-                preferredStyle: preferredStyle
-            )
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self?.present(alert, animated: true, completion: nil)
-        }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        submit(textField)
+        return true
+    }
+    @IBAction func cancel(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
 }
-

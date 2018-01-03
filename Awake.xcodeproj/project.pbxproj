@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8431D76E1FE526C3003F7740 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431D76D1FE526C3003F7740 /* Constant.swift */; };
+		8436F6541FFC63DB00EF7561 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436F6531FFC63DB00EF7561 /* RegisterViewController.swift */; };
 		84615EC31FB9C5F500C4EA1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84615EC21FB9C5F500C4EA1F /* AppDelegate.swift */; };
 		84615EC51FB9C5F500C4EA1F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84615EC41FB9C5F500C4EA1F /* ViewController.swift */; };
 		84615EC81FB9C5F500C4EA1F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84615EC61FB9C5F500C4EA1F /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		8431D76D1FE526C3003F7740 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		8436F6531FFC63DB00EF7561 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		84615EBF1FB9C5F400C4EA1F /* Awake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Awake.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84615EC21FB9C5F500C4EA1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84615EC41FB9C5F500C4EA1F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +65,8 @@
 			isa = PBXGroup;
 			children = (
 				84615EC21FB9C5F500C4EA1F /* AppDelegate.swift */,
+				8436F6531FFC63DB00EF7561 /* RegisterViewController.swift */,
+				8431D76D1FE526C3003F7740 /* Constant.swift */,
 				84615EC41FB9C5F500C4EA1F /* ViewController.swift */,
 				84615ED71FB9D0B400C4EA1F /* AwakeViewController.swift */,
 				84615ED91FB9D42500C4EA1F /* StatusesTableViewController.swift */,
@@ -71,7 +75,6 @@
 				84615ECE1FB9C5F500C4EA1F /* LaunchScreen.storyboard */,
 				84615ED11FB9C5F500C4EA1F /* Info.plist */,
 				84615EC91FB9C5F500C4EA1F /* Awake.xcdatamodeld */,
-				8431D76D1FE526C3003F7740 /* Constant.swift */,
 			);
 			path = Awake;
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 			files = (
 				84615ED81FB9D0B400C4EA1F /* AwakeViewController.swift in Sources */,
 				84615EDA1FB9D42500C4EA1F /* StatusesTableViewController.swift in Sources */,
+				8436F6541FFC63DB00EF7561 /* RegisterViewController.swift in Sources */,
 				84615ECB1FB9C5F500C4EA1F /* Awake.xcdatamodeld in Sources */,
 				84615EC51FB9C5F500C4EA1F /* ViewController.swift in Sources */,
 				84615EC31FB9C5F500C4EA1F /* AppDelegate.swift in Sources */,

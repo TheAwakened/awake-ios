@@ -12,6 +12,8 @@ class AwakeViewController: UIViewController {
     var awakeAPI = Constants.apiUrl + "/api/awakenings"
     var settings = UserDefaults.standard
     
+    
+    
     @IBAction func awake(_ sender: Any) {
         let url = URL(string: awakeAPI)
         var urlRequest = URLRequest(url: url!)
