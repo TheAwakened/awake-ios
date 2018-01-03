@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIGestureRecognizerDelegate, UITextFieldDelegate {
+class LoginViewController: UIViewController, UIGestureRecognizerDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -43,66 +43,27 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, UITextField
             return
         }
         showLoading()
-        let url = URL(string: signInApi)
-        var urlRequest = URLRequest(url: url!)
-        let session = URLSession.shared
-        urlRequest.httpMethod = "POST"
-        
-        let data: [String:Any] = ["auth":["username":usernameField.text!,"password":passwordField.text!]]
-        
-        urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: data)
-        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
-        
-        let task = session.dataTask(with: urlRequest){[weak self] data, response, error in
-            // make sure we got data
-            DispatchQueue.main.async {
-                self?.hideLoading()
+        ApiController.sharedController.login(username: usernameField.text!, password: passwordField.text!, sender: self)
+    }
+    
+    func finishedLogin(result: String, message: String){
+        switch result {
+        case "Success":
+            DispatchQueue.main.async{[weak self] in
+                self?.settings.set(message, forKey: "token")
+                self?.performSegue(withIdentifier: "goToAwake", sender: self)
             }
-            guard data != nil else {
+        case "Error":
+            hideLoading()
+            DispatchQueue.main.async{[weak self] in
                 self?.showAlert(
                     with: "Error",
-                    detail: "Unable to receive data from server",
-                    style: .alert
-                )
-                return
-            }
-            do{
-                guard let responseData = try JSONSerialization.jsonObject(with: data!) as? [String:Any] else {
-                    return
-                }
-                if error != nil {
-                    self?.showAlert(
-                        with: "Error",
-                        detail: "Invalid username or password",
-                        style: .alert
-                    )
-                }else{
-                    if(responseData["jwt"] != nil){
-                        self?.settings.set(responseData["jwt"], forKey: "token")
-                        DispatchQueue.main.async{[weak self] in
-                            self?.performSegue(withIdentifier: "goToAwake", sender: self)
-                        }
-                        
-                    }else{
-                        self?.showAlert(
-                            with: "Error",
-                            detail: "Invalid username or password",
-                            style: .alert
-                        )
-                    }
-                }
-                
-            }catch{
-                self?.showAlert(
-                    with: "Error",
-                    detail: "Error in processing data, please enter the data again.",
+                    detail: "Invalid username or password",
                     style: .alert
                 )
             }
-            // parse the result as JSON, since that's what the API providess
+        default: break
         }
-        task.resume()
     }
     func showLoading(){
         activityIndicator.startAnimating()

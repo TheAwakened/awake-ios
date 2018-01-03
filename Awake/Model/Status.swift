@@ -8,13 +8,13 @@
 
 import Foundation
 
-class User {
-    var id: Int
+class Status {
+    var userId: Int
     var username: String
     var awakeTime: String
     
-    init(id:Int, username:String,awakeTime:String){
-        self.id = id
+    init(userId:Int, username:String,awakeTime:String){
+        self.userId = userId
         self.username = username
         self.awakeTime = awakeTime
     }

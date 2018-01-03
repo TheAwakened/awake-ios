@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46761A90959234395DEDDC26 /* Pods_Awake.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A90C7EFD581F2BD867B587BC /* Pods_Awake.framework */; };
 		8431D76E1FE526C3003F7740 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431D76D1FE526C3003F7740 /* Constant.swift */; };
 		8436F6541FFC63DB00EF7561 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436F6531FFC63DB00EF7561 /* RegisterViewController.swift */; };
+		8436F6561FFCAC1800EF7561 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436F6551FFCAC1800EF7561 /* Status.swift */; };
+		8436F65A1FFCB4BF00EF7561 /* ApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436F6591FFCB4BF00EF7561 /* ApiController.swift */; };
 		84615EC31FB9C5F500C4EA1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84615EC21FB9C5F500C4EA1F /* AppDelegate.swift */; };
-		84615EC51FB9C5F500C4EA1F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84615EC41FB9C5F500C4EA1F /* ViewController.swift */; };
+		84615EC51FB9C5F500C4EA1F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84615EC41FB9C5F500C4EA1F /* LoginViewController.swift */; };
 		84615EC81FB9C5F500C4EA1F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84615EC61FB9C5F500C4EA1F /* Main.storyboard */; };
 		84615ECB1FB9C5F500C4EA1F /* Awake.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84615EC91FB9C5F500C4EA1F /* Awake.xcdatamodeld */; };
 		84615ECD1FB9C5F500C4EA1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84615ECC1FB9C5F500C4EA1F /* Assets.xcassets */; };
@@ -20,11 +23,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E75FEABF9F9C6190B0845E7 /* Pods-Awake.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Awake.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Awake/Pods-Awake.debug.xcconfig"; sourceTree = "<group>"; };
+		7ADB40243F7EC94EF4E42BF1 /* Pods-Awake.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Awake.release.xcconfig"; path = "Pods/Target Support Files/Pods-Awake/Pods-Awake.release.xcconfig"; sourceTree = "<group>"; };
 		8431D76D1FE526C3003F7740 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		8436F6531FFC63DB00EF7561 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		8436F6551FFCAC1800EF7561 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
+		8436F6591FFCB4BF00EF7561 /* ApiController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiController.swift; sourceTree = "<group>"; };
 		84615EBF1FB9C5F400C4EA1F /* Awake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Awake.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84615EC21FB9C5F500C4EA1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		84615EC41FB9C5F500C4EA1F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		84615EC41FB9C5F500C4EA1F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		84615EC71FB9C5F500C4EA1F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84615ECA1FB9C5F500C4EA1F /* Awake.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Awake.xcdatamodel; sourceTree = "<group>"; };
 		84615ECC1FB9C5F500C4EA1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -32,6 +39,7 @@
 		84615ED11FB9C5F500C4EA1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84615ED71FB9D0B400C4EA1F /* AwakeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwakeViewController.swift; sourceTree = "<group>"; };
 		84615ED91FB9D42500C4EA1F /* StatusesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusesTableViewController.swift; sourceTree = "<group>"; };
+		A90C7EFD581F2BD867B587BC /* Pods_Awake.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Awake.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,17 +47,47 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46761A90959234395DEDDC26 /* Pods_Awake.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		716138CB20117FB462390E80 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A90C7EFD581F2BD867B587BC /* Pods_Awake.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8436F6571FFCAC5900EF7561 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8436F6551FFCAC1800EF7561 /* Status.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8436F65B1FFCBD4900EF7561 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8436F6531FFC63DB00EF7561 /* RegisterViewController.swift */,
+				84615EC41FB9C5F500C4EA1F /* LoginViewController.swift */,
+				84615ED71FB9D0B400C4EA1F /* AwakeViewController.swift */,
+				84615ED91FB9D42500C4EA1F /* StatusesTableViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
 		84615EB61FB9C5F400C4EA1F = {
 			isa = PBXGroup;
 			children = (
 				84615EC11FB9C5F400C4EA1F /* Awake */,
 				84615EC01FB9C5F400C4EA1F /* Products */,
+				D8CDE80782FC22EBD79AC936 /* Pods */,
+				716138CB20117FB462390E80 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,11 +103,10 @@
 			isa = PBXGroup;
 			children = (
 				84615EC21FB9C5F500C4EA1F /* AppDelegate.swift */,
-				8436F6531FFC63DB00EF7561 /* RegisterViewController.swift */,
 				8431D76D1FE526C3003F7740 /* Constant.swift */,
-				84615EC41FB9C5F500C4EA1F /* ViewController.swift */,
-				84615ED71FB9D0B400C4EA1F /* AwakeViewController.swift */,
-				84615ED91FB9D42500C4EA1F /* StatusesTableViewController.swift */,
+				8436F6591FFCB4BF00EF7561 /* ApiController.swift */,
+				8436F6571FFCAC5900EF7561 /* Model */,
+				8436F65B1FFCBD4900EF7561 /* View Controllers */,
 				84615EC61FB9C5F500C4EA1F /* Main.storyboard */,
 				84615ECC1FB9C5F500C4EA1F /* Assets.xcassets */,
 				84615ECE1FB9C5F500C4EA1F /* LaunchScreen.storyboard */,
@@ -79,6 +116,15 @@
 			path = Awake;
 			sourceTree = "<group>";
 		};
+		D8CDE80782FC22EBD79AC936 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6E75FEABF9F9C6190B0845E7 /* Pods-Awake.debug.xcconfig */,
+				7ADB40243F7EC94EF4E42BF1 /* Pods-Awake.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -86,9 +132,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84615ED41FB9C5F500C4EA1F /* Build configuration list for PBXNativeTarget "Awake" */;
 			buildPhases = (
+				2FB13ECE49E04A4D99B7B166 /* [CP] Check Pods Manifest.lock */,
 				84615EBB1FB9C5F400C4EA1F /* Sources */,
 				84615EBC1FB9C5F400C4EA1F /* Frameworks */,
 				84615EBD1FB9C5F400C4EA1F /* Resources */,
+				4BAA1F48FF1B0A82F42FE3F0 /* [CP] Embed Pods Frameworks */,
+				217BA81AC66AE23CB386134E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -146,6 +195,62 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		217BA81AC66AE23CB386134E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Awake/Pods-Awake-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2FB13ECE49E04A4D99B7B166 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Awake-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4BAA1F48FF1B0A82F42FE3F0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Awake/Pods-Awake-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Awake/Pods-Awake-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		84615EBB1FB9C5F400C4EA1F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -155,8 +260,10 @@
 				84615EDA1FB9D42500C4EA1F /* StatusesTableViewController.swift in Sources */,
 				8436F6541FFC63DB00EF7561 /* RegisterViewController.swift in Sources */,
 				84615ECB1FB9C5F500C4EA1F /* Awake.xcdatamodeld in Sources */,
-				84615EC51FB9C5F500C4EA1F /* ViewController.swift in Sources */,
+				84615EC51FB9C5F500C4EA1F /* LoginViewController.swift in Sources */,
+				8436F6561FFCAC1800EF7561 /* Status.swift in Sources */,
 				84615EC31FB9C5F500C4EA1F /* AppDelegate.swift in Sources */,
+				8436F65A1FFCB4BF00EF7561 /* ApiController.swift in Sources */,
 				8431D76E1FE526C3003F7740 /* Constant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,6 +399,7 @@
 		};
 		84615ED51FB9C5F500C4EA1F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6E75FEABF9F9C6190B0845E7 /* Pods-Awake.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -307,6 +415,7 @@
 		};
 		84615ED61FB9C5F500C4EA1F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7ADB40243F7EC94EF4E42BF1 /* Pods-Awake.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
