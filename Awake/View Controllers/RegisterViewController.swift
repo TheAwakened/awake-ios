@@ -20,19 +20,19 @@ class RegisterViewController: UIViewController {
     }
     
     @IBAction func submit(_ sender: Any) {
-        if usernameField.text! == "" {
+        guard usernameField.text! != "" else {
             self.showAlert(with: "Error", detail: "Username cannot be empty", style: .alert)
             return
         }
-        if passwordField.text! == "" {
+        guard passwordField.text! != "" else {
             self.showAlert(with: "Error", detail: "Password cannot be empty", style: .alert)
             return
         }
-        if confirmPasswordField.text! == "" {
+        guard confirmPasswordField.text! != "" else {
             self.showAlert(with: "Error", detail: "Confirm password cannot be empty", style: .alert)
             return
         }
-        if passwordField.text! != confirmPasswordField.text! {
+        guard passwordField.text! == confirmPasswordField.text! else {
             self.showAlert(with: "Error", detail: "Password and confirm password are different", style: .alert)
             return
         }
