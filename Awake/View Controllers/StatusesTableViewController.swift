@@ -42,17 +42,12 @@ class StatusesTableViewController: UITableViewController {
     func loadData(){
         ApiController.sharedController.getAwakeStatuses(){ (result, statuses) in
             guard result else {
-                DispatchQueue.main.async { [weak self] in
-                    self?.showAlert(with: "Error", detail: "Unable to update table", style: .alert)
-                }
+                self.showAlert(with: "Error", detail: "Unable to update table", style: .alert)
                 return
             }
-            DispatchQueue.main.async { [weak self] in
-                self?.statuses = statuses!
-                self?.tableView.reloadData()
-                self?.refreshControl?.endRefreshing()
-            }
-
+            self.statuses = statuses!
+            self.tableView.reloadData()
+            self.refreshControl?.endRefreshing()
         }
     }
 }

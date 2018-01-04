@@ -38,28 +38,24 @@ class RegisterViewController: UIViewController {
         }
         ApiController.sharedController.register(username: usernameField.text!, password: passwordField.text!){ result in
             guard result else {
-                DispatchQueue.main.async { [weak self] in
-                    self?.showAlert(
-                        with: "Error",
-                        detail: "Username has already been taken",
-                        style: .alert
-                    )
-                }
+                self.showAlert(
+                    with: "Error",
+                    detail: "Username has already been taken",
+                    style: .alert
+                )
                 return
             }
             
-            DispatchQueue.main.async { [weak self] in
-                let action = UIAlertAction(title: "OK", style: .default){ action in
-                    self?.dismiss(animated: true, completion: nil)
-                }
-                self?.showAlert(with: "Success", detail: "Successfully Registered", actions: [action], style: .alert)
-                let alert = UIAlertController(
-                    title: "Success",
-                    message: "Successfully Registered",
-                    preferredStyle: .alert
-                )
-                self?.present(alert, animated: true, completion: nil)
+            let action = UIAlertAction(title: "OK", style: .default){ action in
+                self.dismiss(animated: true, completion: nil)
             }
+            self.showAlert(with: "Success", detail: "Successfully Registered", actions: [action], style: .alert)
+            let alert = UIAlertController(
+                title: "Success",
+                message: "Successfully Registered",
+                preferredStyle: .alert
+            )
+            self.present(alert, animated: true, completion: nil)
         }
     }
     

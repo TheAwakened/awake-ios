@@ -41,21 +41,17 @@ class LoginViewController: UIViewController {
         showLoading()
         ApiController.sharedController.login(username: usernameField.text!, password: passwordField.text!){ (result, message) in
             guard result else {
-                DispatchQueue.main.async{[weak self] in
-                    self?.hideLoading()
-                    self?.showAlert(
-                        with: "Error",
-                        detail: "Invalid username or password",
-                        style: .alert
-                    )
-                }
+                self.hideLoading()
+                self.showAlert(
+                    with: "Error",
+                    detail: "Invalid username or password",
+                    style: .alert
+                )
                 return
             }
-            DispatchQueue.main.async{[weak self] in
-                self?.hideLoading()
-                self?.settings.set(message, forKey: "token")
-                self?.performSegue(withIdentifier: "goToAwake", sender: self)
-            }
+            self.hideLoading()
+            self.settings.set(message, forKey: "token")
+            self.performSegue(withIdentifier: "goToAwake", sender: self)
         }
     }
 

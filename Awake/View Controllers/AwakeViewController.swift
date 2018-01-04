@@ -14,22 +14,18 @@ class AwakeViewController: UIViewController {
     @IBAction func awake(_ sender: Any) {
         ApiController.sharedController.awake(){ result in
             guard result else{
-                DispatchQueue.main.async{ [weak self] in
-                    self?.showAlert(
-                        with: "Error",
-                        detail: "Cannot awake more than once",
-                        style: .alert
-                    )
-                }
-                return
-            }
-            DispatchQueue.main.async{ [weak self] in
-                self?.showAlert(
-                    with: "Sucess",
-                    detail: "You are awaken!",
+                self.showAlert(
+                    with: "Error",
+                    detail: "Cannot awake more than once",
                     style: .alert
                 )
+                return
             }
+            self.showAlert(
+                with: "Sucess",
+                detail: "You are awaken!",
+                style: .alert
+            )
         }
     }
 
