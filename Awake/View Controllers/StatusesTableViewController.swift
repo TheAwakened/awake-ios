@@ -10,12 +10,10 @@ import UIKit
 
 class StatusesTableViewController: UITableViewController {
     var statuses: [Status] = []
+    
     @objc func refreshing(_ sender:AnyObject)
     {
-        // Updating your data here...
         loadData()
-        self.tableView.reloadData()
-        self.refreshControl?.endRefreshing()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,36 +38,6 @@ class StatusesTableViewController: UITableViewController {
         cell?.detailTextLabel?.text = status.awakeTime
         return cell!
     }
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    @objc func refresh(_ sender:AnyObject) {
-        // Code to refresh table view
-        loadData()
-        tableView.reloadData()
-    }
     
     func loadData(){
         ApiController.sharedController.getAwakeStatuses(){ (result, statuses) in
@@ -78,6 +46,7 @@ class StatusesTableViewController: UITableViewController {
                 DispatchQueue.main.async { [weak self] in
                     self?.statuses = statuses
                     self?.tableView.reloadData()
+                    self?.refreshControl?.endRefreshing()
                 }
             case "Error":
                 DispatchQueue.main.async { [weak self] in

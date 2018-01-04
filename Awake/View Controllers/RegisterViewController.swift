@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RegisterViewController: UIViewController, UIGestureRecognizerDelegate, UITextFieldDelegate {
+class RegisterViewController: UIViewController {
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var confirmPasswordField: UITextField!
@@ -65,17 +65,21 @@ class RegisterViewController: UIViewController, UIGestureRecognizerDelegate, UIT
         }
     }
     
+    @IBAction func cancel(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+}
+
+extension RegisterViewController: UIGestureRecognizerDelegate {
     @IBAction func tappingBackground(_ sender: Any) {
         self.view.endEditing(true)
     }
-    
+}
+
+extension RegisterViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         submit(textField)
         return true
-    }
-    
-    @IBAction func cancel(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
     }
 }
