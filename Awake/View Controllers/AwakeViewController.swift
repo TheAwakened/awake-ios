@@ -13,16 +13,7 @@ class AwakeViewController: UIViewController {
     
     @IBAction func awake(_ sender: Any) {
         ApiController.sharedController.awake(){ result in
-            switch result {
-            case "Success":
-                DispatchQueue.main.async{ [weak self] in
-                    self?.showAlert(
-                        with: "Sucess",
-                        detail: "You are awaken!",
-                        style: .alert
-                    )
-                }
-            case "Error":
+            guard result else{
                 DispatchQueue.main.async{ [weak self] in
                     self?.showAlert(
                         with: "Error",
@@ -30,8 +21,14 @@ class AwakeViewController: UIViewController {
                         style: .alert
                     )
                 }
-            default:
-                break
+                return
+            }
+            DispatchQueue.main.async{ [weak self] in
+                self?.showAlert(
+                    with: "Sucess",
+                    detail: "You are awaken!",
+                    style: .alert
+                )
             }
         }
     }

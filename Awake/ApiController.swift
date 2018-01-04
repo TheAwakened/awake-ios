@@ -18,7 +18,7 @@ class ApiController {
     private init(){
     }
     
-    func login(username: String, password: String, completion: ((_ result: String, _ message: String) -> Void)?) {
+    func login(username: String, password: String, completion: ((_ result: Bool, _ message: String) -> Void)?) {
         let signInApiUrl = hostUrl + "/api/authenticate"
         let parameters: Parameters = [
             "auth": [
@@ -35,17 +35,17 @@ class ApiController {
             
             if json["jwt"] != JSON.null {
                 let message = json["jwt"]
-                completion?("Success",message.string!)
+                completion?(true,message.string!)
                 self.token = message.string!
                 
             } else if json["error"] != JSON.null {
                 let message = json["error"]
-                completion?("Error", message.string!)
+                completion?(false, message.string!)
             }
         }
     }
     
-    func register(username: String, password: String, completion: @escaping (String) -> Void){
+    func register(username: String, password: String, completion: ((_ result: Bool) -> Void)?) {
         let registerApiUrl = hostUrl + "/api/users"
         let parameters: Parameters = [
             "user":[
@@ -60,14 +60,14 @@ class ApiController {
             }
             let json = JSON(responseData)
             if json["user"] != JSON.null {
-                completion("Success")
+                completion?(true)
             }else if json["errors"] != JSON.null {
-                completion("Error")
+                completion?(false)
             }
         }
     }
     
-    func awake(completion: @escaping (String) -> Void) {
+    func awake(completion: ((_ result: Bool) -> Void)?) {
         let awakeAPI = hostUrl + "/api/awakenings"
         let parameters: Parameters = [:]
         let headers: HTTPHeaders = [
@@ -80,14 +80,14 @@ class ApiController {
             }
             let json = JSON(responseData)
             if json["awakening"] != JSON.null {
-                completion("Success")
+                completion?(true)
             }else if json["errors"] != JSON.null {
-                completion("Error")
+                completion?(false)
             }
         }
         
     }
-    func getAwakeStatuses(completion: @escaping (String, [Status]) -> Void){
+    func getAwakeStatuses(completion: ((_ result: Bool, _ statuses: [Status]?) -> Void)?) {
         let statusApiUrl = hostUrl + "/api/today"
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + token!
@@ -103,12 +103,12 @@ class ApiController {
                     if let newStatus = Status(status: status) {
                         statuses.append(newStatus)
                     }else{
-                        completion("Errors",[])
+                        completion?(false, nil)
                     }
                 }
-                completion("Success", statuses)
+                completion?(true, statuses)
             }else if json["errors"] != JSON.null {
-                completion("Errors", [])
+                completion?(false, nil)
             }
             
         }

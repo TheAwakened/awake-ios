@@ -16,7 +16,13 @@ extension UIViewController {
                 message: message,
                 preferredStyle: preferredStyle
             )
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            if let alertActions = actions, alertActions.count > 0 {
+                for action in alertActions {
+                    alert.addAction(action)
+                }
+            }else{
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            }
             self?.present(alert, animated: true, completion: nil)
         }
     }
