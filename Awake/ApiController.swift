@@ -100,20 +100,10 @@ class ApiController {
             if json["users"] != JSON.null {
                 var statuses: [Status] = []
                 for (_,status) in json["users"] {
-                    if let awakeTime = status["awaken_time"].string {
-                        let newStatus = Status(
-                            userId: status["id"].int!,
-                            username: status["username"].string!,
-                            awakeTime: awakeTime
-                        )
+                    if let newStatus = Status(status: status) {
                         statuses.append(newStatus)
                     }else{
-                        let newStatus = Status(
-                            userId: status["id"].int!,
-                            username: status["username"].string!,
-                            awakeTime: "Sleeping"
-                        )
-                        statuses.append(newStatus)
+                        completion("Errors",[])
                     }
                 }
                 completion("Success", statuses)
