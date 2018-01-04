@@ -18,7 +18,7 @@ class ApiController {
     private init(){
     }
     
-    func login(username: String, password: String, completion: @escaping (String, String) -> Void) {
+    func login(username: String, password: String, completion: ((_ result: String, _ message: String) -> Void)?) {
         let signInApiUrl = hostUrl + "/api/authenticate"
         let parameters: Parameters = [
             "auth": [
@@ -35,12 +35,12 @@ class ApiController {
             
             if json["jwt"] != JSON.null {
                 let message = json["jwt"]
-                completion("Success",message.string!)
+                completion?("Success",message.string!)
                 self.token = message.string!
                 
             } else if json["error"] != JSON.null {
                 let message = json["error"]
-                completion("Error", message.string!)
+                completion?("Error", message.string!)
             }
         }
     }

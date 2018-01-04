@@ -15,21 +15,14 @@ class Status {
     var awakeTime: String
     
     init?(status: JSON){
-        if let userId = status["id"].int {
-            self.userId = userId
-        } else {
+        guard
+            let userId: Int = status["id"].int,
+            let username = status["username"].string
+        else {
             return nil
         }
-        if let username = status["username"].string {
-            self.username = username
-        }else{
-            return nil
-        }
-        
-        if let awakeTime = status["awaken_time"].string {
-            self.awakeTime = awakeTime
-        }else{
-            self.awakeTime = "Sleeping"
-        }
+        self.userId = userId
+        self.username = username
+        self.awakeTime = status["awaken_time"].string ?? "Sleeping"
     }
 }

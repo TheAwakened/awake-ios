@@ -9,7 +9,7 @@
 import UIKit
 
 class RegisterViewController: UIViewController {
-    @IBOutlet weak var usernameField: UITextField!
+    @IBOutlet private weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var confirmPasswordField: UITextField!
     
@@ -65,7 +65,7 @@ class RegisterViewController: UIViewController {
     }
     
     @IBAction func cancel(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

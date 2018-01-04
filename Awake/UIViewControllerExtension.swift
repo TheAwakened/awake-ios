@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIViewController {
-    func showAlert(with title: String, detail message: String, style preferredStyle: UIAlertControllerStyle) {
+    func showAlert(with title: String, detail message: String, actions: [UIAlertAction]? = [], style preferredStyle: UIAlertControllerStyle) {
         DispatchQueue.main.async {[weak self] in
             let alert = UIAlertController(
                 title: title,

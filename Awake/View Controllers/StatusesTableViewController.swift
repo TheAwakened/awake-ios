@@ -11,7 +11,7 @@ import UIKit
 class StatusesTableViewController: UITableViewController {
     var statuses: [Status] = []
     
-    @objc func refreshing(_ sender:AnyObject)
+    @objc func refreshing(_ sender: AnyObject)
     {
         loadData()
     }
