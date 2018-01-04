@@ -8,14 +8,13 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, UIGestureRecognizerDelegate, UITextFieldDelegate {
+class LoginViewController: UIViewController {
     
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var loginButton: UIButton!
-    var signInApi = Constants.apiUrl + "/api/authenticate"
     var settings = UserDefaults.standard
     
     override func viewDidLoad() {
@@ -26,70 +25,64 @@ class LoginViewController: UIViewController, UIGestureRecognizerDelegate, UIText
         {
             self.performSegue(withIdentifier: "goToAwake", sender: self)
         }
-            // Do any additional setup after loading the view, typically from a nib.
     }
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        login(textField)
-        return true
-    }
+    
     @IBAction func login(_ sender: Any) {
-        if usernameField.text! == "" {
+        guard usernameField.text! != "" else {
             self.showAlert(with: "Error", detail: "Username cannot be empty", style: .alert)
             return
         }
-        if passwordField.text! == "" {
+        
+        guard passwordField.text! != "" else {
             self.showAlert(with: "Error", detail: "Password cannot be empty", style: .alert)
             return
         }
+        
         showLoading()
-        ApiController.sharedController.login(username: usernameField.text!, password: passwordField.text!, sender: self)
-    }
-    
-    func finishedLogin(result: String, message: String){
-        switch result {
-        case "Success":
-            DispatchQueue.main.async{[weak self] in
-                self?.settings.set(message, forKey: "token")
-                self?.performSegue(withIdentifier: "goToAwake", sender: self)
+        ApiController.sharedController.login(username: usernameField.text!, password: passwordField.text!){ (result, message) in
+            switch result {
+                case "Success":
+                    DispatchQueue.main.async{[weak self] in
+                        self?.hideLoading()
+                        self?.settings.set(message, forKey: "token")
+                        self?.performSegue(withIdentifier: "goToAwake", sender: self)
+                    }
+                case "Error":
+                    DispatchQueue.main.async{[weak self] in
+                        self?.hideLoading()
+                        self?.showAlert(
+                            with: "Error",
+                            detail: "Invalid username or password",
+                            style: .alert
+                        )
+                    }
+                default: break
             }
-        case "Error":
-            hideLoading()
-            DispatchQueue.main.async{[weak self] in
-                self?.showAlert(
-                    with: "Error",
-                    detail: "Invalid username or password",
-                    style: .alert
-                )
-            }
-        default: break
         }
     }
-    func showLoading(){
+
+    func showLoading() {
         activityIndicator.startAnimating()
         loginButton.alpha = 0
     }
-    func hideLoading(){
+    
+    func hideLoading() {
         activityIndicator.stopAnimating()
         loginButton.alpha = 1
     }
+}
+
+extension LoginViewController: UIGestureRecognizerDelegate {
     @IBAction func tappingBackground(_ sender: Any) {
         self.view.endEditing(true)
     }
 }
 
-
-extension UIViewController {
-    func showAlert(with title: String, detail message: String, style preferredStyle: UIAlertControllerStyle){
-        DispatchQueue.main.async {[weak self] in
-            let alert = UIAlertController(
-                title: title,
-                message: message,
-                preferredStyle: preferredStyle
-            )
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self?.present(alert, animated: true, completion: nil)
-        }
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        login(textField)
+        return true
     }
 }
 

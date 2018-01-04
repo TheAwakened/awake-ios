@@ -9,7 +9,6 @@
 import UIKit
 
 class StatusesTableViewController: UITableViewController {
-    var statusAPI = Constants.apiUrl + "/api/today"
     var statuses: [Status] = []
     @objc func refreshing(_ sender:AnyObject)
     {
@@ -71,12 +70,22 @@ class StatusesTableViewController: UITableViewController {
         loadData()
         tableView.reloadData()
     }
-    func finishedLoadingData(result: String, data: [Status]){
-        statuses = data
-        refresh(self)
-    }
+    
     func loadData(){
-
-        ApiController.sharedController.getAwakeStatuses(sender: self)
+        ApiController.sharedController.getAwakeStatuses(){ (result, statuses) in
+            switch result {
+            case "Success":
+                DispatchQueue.main.async { [weak self] in
+                    self?.statuses = statuses
+                    self?.tableView.reloadData()
+                }
+            case "Error":
+                DispatchQueue.main.async { [weak self] in
+                    self?.showAlert(with: "Error", detail: "Unable to update table", style: .alert)
+                }
+            default:
+                break
+            }
+        }
     }
 }
