@@ -1,0 +1,4 @@
+language: swift
+xcode_workspace: Awake.xcworkspace
+osx_image: xcode9.2
+podfile: Podfile

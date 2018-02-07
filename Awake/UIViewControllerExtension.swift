@@ -10,20 +10,18 @@ import UIKit
 
 extension UIViewController {
     func showAlert(with title: String, detail message: String, actions: [UIAlertAction]? = [], style preferredStyle: UIAlertControllerStyle) {
-        DispatchQueue.main.async {[weak self] in
-            let alert = UIAlertController(
-                title: title,
-                message: message,
-                preferredStyle: preferredStyle
-            )
-            if let alertActions = actions, alertActions.count > 0 {
-                for action in alertActions {
-                    alert.addAction(action)
-                }
-            }else{
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: preferredStyle
+        )
+        if let alertActions = actions, alertActions.count > 0 {
+            for action in alertActions {
+                alert.addAction(action)
             }
-            self?.present(alert, animated: true, completion: nil)
+        }else{
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         }
+        self.present(alert, animated: true, completion: nil)
     }
 }

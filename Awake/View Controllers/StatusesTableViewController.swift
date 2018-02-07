@@ -13,12 +13,20 @@ class StatusesTableViewController: UITableViewController {
     
     @objc func refreshing(_ sender: AnyObject)
     {
-        loadData()
+        ApiController.sharedController.getAwakeStatuses(){ (result, statuses) in
+            guard result else {
+                self.showAlert(with: "Error", detail: "Unable to update table", style: .alert)
+                return
+            }
+            self.statuses = statuses!
+            self.tableView.reloadData()
+            self.refreshControl?.endRefreshing()
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.refreshControl?.addTarget(self, action: #selector(refreshing), for: UIControlEvents.valueChanged)
-        loadData()
+        refreshing(self)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -37,17 +45,5 @@ class StatusesTableViewController: UITableViewController {
         cell?.textLabel?.text = status.username
         cell?.detailTextLabel?.text = status.awakeTime
         return cell!
-    }
-    
-    func loadData(){
-        ApiController.sharedController.getAwakeStatuses(){ (result, statuses) in
-            guard result else {
-                self.showAlert(with: "Error", detail: "Unable to update table", style: .alert)
-                return
-            }
-            self.statuses = statuses!
-            self.tableView.reloadData()
-            self.refreshControl?.endRefreshing()
-        }
     }
 }
